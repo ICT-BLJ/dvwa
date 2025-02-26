@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: dvwa-dev
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dvwa
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=dvwa
+      - MYSQL_DATABASE=dvwa
+    networks:
+      - dvwa-net
+    volumes:
+      - dvwa-data:/var/lib/mysql
+
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/base:latest
+    container_name: devcontainer-vscode
+    depends_on:
+      - dvwa
+    volumes:
+      - ..:/workspace:cached
+    networks:
+      - dvwa-net
+    command: sleep infinity
+
+networks:
+  dvwa-net:
+    driver: bridge
+
+volumes:
+  dvwa-data:
