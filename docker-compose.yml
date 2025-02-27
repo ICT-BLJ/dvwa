@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   dvwa:
-    image: vulnerables/web-dvwa:latest
+    image: vulnerables/web-dvwa
     container_name: dvwa-dev
     restart: always
     ports:
@@ -15,7 +15,9 @@ services:
     networks:
       - dvwa-net
     volumes:
-      - dvwa-data:/var/lib/mysql
+      - dvwa-html:/var/www/html
+      - dvwa-mysql:/var/lib/mysql
+      - ./custom_php.ini:/etc/php/7.0/apache2/conf.d/custom_php.ini
 
   devcontainer:
     image: mcr.microsoft.com/devcontainers/base:latest
@@ -33,4 +35,5 @@ networks:
     driver: bridge
 
 volumes:
-  dvwa-data:
+  dvwa-html:
+  dvwa-mysql:
