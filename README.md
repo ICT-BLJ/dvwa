@@ -55,12 +55,6 @@ If you encounter issues:
 - Restart the Dev Container (`Ctrl+Shift+P` → **Dev Containers: Rebuild and Reopen in Container**)
 - Check container logs: `docker logs dvwa-dev`
 
-### Dev Container fails with older Linux runtime
-If VS Code reports that VS Code Server cannot run on an older Linux distribution, this setup already includes a fix:
-- VS Code now connects to the dedicated `devcontainer` service (`mcr.microsoft.com/devcontainers/base:latest`).
-- DVWA keeps running in the separate `dvwa` service.
-
-This avoids running VS Code Server inside the legacy DVWA image while preserving the vulnerable DVWA app for practice.
 
 Happy Hacking! 🛡️
 
