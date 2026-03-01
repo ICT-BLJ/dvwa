@@ -37,7 +37,7 @@ Before you start, ensure you have the following installed on your system:
 
 ## File Overview
 - `.devcontainer/devcontainer.json` - Configures the VS Code Dev Container.
-- `docker-compose.yml` - Defines the Docker services for DVWA and MySQL.
+- `docker-compose.yml` - Defines the Docker services for DVWA and the dedicated VS Code dev container.
 - `README.md` - This documentation.
 
 ## Learning Web Application Security
@@ -52,8 +52,15 @@ DVWA is an excellent platform to practice web application security concepts, inc
 ## Troubleshooting
 If you encounter issues:
 - Make sure Docker is running
-- Restart the Dev Container (`Ctrl+Shift+P` → **Remote-Containers: Rebuild and Reopen in Container**)
+- Restart the Dev Container (`Ctrl+Shift+P` → **Dev Containers: Rebuild and Reopen in Container**)
 - Check container logs: `docker logs dvwa-dev`
+
+### Dev Container fails with older Linux runtime
+If VS Code reports that VS Code Server cannot run on an older Linux distribution, this setup already includes a fix:
+- VS Code now connects to the dedicated `devcontainer` service (`mcr.microsoft.com/devcontainers/base:latest`).
+- DVWA keeps running in the separate `dvwa` service.
+
+This avoids running VS Code Server inside the legacy DVWA image while preserving the vulnerable DVWA app for practice.
 
 Happy Hacking! 🛡️
 
